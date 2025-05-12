@@ -5,7 +5,7 @@ import { Button, StyleSheet, Switch, Text, View } from 'react-native';
 const SettingsScreen = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const { soundEnabled, toggleSound } = useSoundContext();  // Use context
+  const { soundEnabled, toggleSound } = useSoundContext();
 
   return (
     <View style={styles.container}>
@@ -30,6 +30,11 @@ const SettingsScreen = () => {
         setIsDarkMode(false);
         setNotificationsEnabled(true);
       }} color="red" />
+
+      
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>Developed by Arman</Text>
+      </View>
     </View>
   );
 };
@@ -39,6 +44,8 @@ const styles = StyleSheet.create({
   title: { fontSize: 32, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
   settingRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginVertical: 15 },
   settingText: { fontSize: 18 },
+  footer: { marginTop: 40, alignItems: 'center' },
+  footerText: { fontSize: 14, color: 'gray' },
 });
 
 export default SettingsScreen;

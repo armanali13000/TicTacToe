@@ -62,11 +62,20 @@ export default function HomeTab() {
             key={index}
             style={styles.cell}
             onPress={() => {
-              playClickSound(); // Play click sound for normal moves
+              playClickSound(); 
               handleClick(index);
             }}
           >
-            <Text style={styles.cellText}>{cell}</Text>
+            <Text
+              style={[
+                styles.cellText,
+                {
+                  color: cell === 'X' ? '#8AC9EA' : cell === 'O' ? '#3546E3' : '#000',
+                },
+              ]}
+            >
+              {cell}
+            </Text>
           </TouchableOpacity>
         ))}
       </View>

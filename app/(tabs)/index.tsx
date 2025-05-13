@@ -1,4 +1,5 @@
 import { useSound } from '@/utils/playClickSound'; // Import the updated sound hook
+import { useTheme } from '@/utils/ThemeContext';
 import React, { useState } from 'react';
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -6,6 +7,7 @@ export default function HomeTab() {
   const { playClickSound, playWinSound } = useSound(); // Get both sound players
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
+  const { isDarkMode } = useTheme();
 
   const handleClick = (index: number) => {
     if (board[index] || winner) return;
@@ -51,8 +53,8 @@ export default function HomeTab() {
   const status = winner ? `Winner: ${winner}` : `Next player: ${isXNext ? 'X' : 'O'}`;
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.turnText}>
+    <View style={[styles.container, { backgroundColor: isDarkMode ? '#000' : '#fff' }]}>
+      <Text style={[styles.turnText, { color: isDarkMode ? '#fff' : '#000' }]}>
         Player {isXNext ? 'X' : 'O'}'s Turn
       </Text>
 
@@ -70,7 +72,7 @@ export default function HomeTab() {
               style={[
                 styles.cellText,
                 {
-                  color: cell === 'X' ? '#8AC9EA' : cell === 'O' ? '#3546E3' : '#000',
+                  color: cell === 'X' ? '#8AC9EA' : cell === 'O' ? '#3546E3' : (isDarkMode ? '#fff' : '#000'),
                 },
               ]}
             >
@@ -96,7 +98,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
   },
   status: {
     fontSize: 24,
@@ -139,6 +140,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
-    color: '#333',
   },
 });
